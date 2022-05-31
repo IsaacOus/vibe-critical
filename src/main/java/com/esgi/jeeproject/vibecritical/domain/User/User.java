@@ -1,5 +1,6 @@
-package com.esgi.jeeproject.vibecritical.domain;
+package com.esgi.jeeproject.vibecritical.domain.User;
 
+import com.esgi.jeeproject.vibecritical.domain.Rating.Rating;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity

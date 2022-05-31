@@ -1,4 +1,4 @@
-package com.esgi.jeeproject.vibecritical.api;
+package com.esgi.jeeproject.vibecritical.api.User;
 
 class RoleToUserForm {
     private String username;

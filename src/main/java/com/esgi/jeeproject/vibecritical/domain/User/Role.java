@@ -1,4 +1,4 @@
-package com.esgi.jeeproject.vibecritical.domain;
+package com.esgi.jeeproject.vibecritical.domain.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

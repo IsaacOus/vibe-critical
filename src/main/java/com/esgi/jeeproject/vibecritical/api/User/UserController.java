@@ -1,8 +1,8 @@
-package com.esgi.jeeproject.vibecritical.api;
+package com.esgi.jeeproject.vibecritical.api.User;
 
-import com.esgi.jeeproject.vibecritical.domain.Role;
-import com.esgi.jeeproject.vibecritical.domain.User;
-import com.esgi.jeeproject.vibecritical.service.UserService;
+import com.esgi.jeeproject.vibecritical.domain.User.Role;
+import com.esgi.jeeproject.vibecritical.domain.User.User;
+import com.esgi.jeeproject.vibecritical.service.User.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

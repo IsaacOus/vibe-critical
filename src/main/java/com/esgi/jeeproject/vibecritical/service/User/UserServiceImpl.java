@@ -1,9 +1,9 @@
-package com.esgi.jeeproject.vibecritical.service;
+package com.esgi.jeeproject.vibecritical.service.User;
 
-import com.esgi.jeeproject.vibecritical.domain.Role;
-import com.esgi.jeeproject.vibecritical.domain.User;
-import com.esgi.jeeproject.vibecritical.repositories.RoleRepository;
-import com.esgi.jeeproject.vibecritical.repositories.UserRepository;
+import com.esgi.jeeproject.vibecritical.domain.User.Role;
+import com.esgi.jeeproject.vibecritical.domain.User.User;
+import com.esgi.jeeproject.vibecritical.repositories.User.RoleRepository;
+import com.esgi.jeeproject.vibecritical.repositories.User.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
