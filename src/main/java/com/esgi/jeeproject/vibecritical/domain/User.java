@@ -1,11 +1,18 @@
 package com.esgi.jeeproject.vibecritical.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
@@ -47,15 +54,6 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
-    }
-
-    public User(String name, String username, String password) {
-        this.name = name;
-        this.username = username;
-        this.password = password;
-    }
-
-    public User() {
     }
 
     @Override
