@@ -25,8 +25,8 @@ public class RatingController {
         return ResponseEntity.ok().body(ratingService.getRatings());
     }
 
-    @GetMapping("/ratings/:ratingId")
-    public ResponseEntity<Rating> getRatingById(Long ratingId){
+    @GetMapping("/ratings/{ratingId}")
+    public ResponseEntity<Rating> getRatingById(@PathVariable Long ratingId){
         return ResponseEntity.ok().body(ratingService.getRatingById(ratingId));
     }
 
