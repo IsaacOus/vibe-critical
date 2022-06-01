@@ -1,6 +1,7 @@
 package com.esgi.jeeproject.vibecritical.api.User;
 
 import com.esgi.jeeproject.vibecritical.domain.User.Role;
+import com.esgi.jeeproject.vibecritical.domain.User.RoleToUserForm;
 import com.esgi.jeeproject.vibecritical.domain.User.User;
 import com.esgi.jeeproject.vibecritical.service.User.UserService;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
     @PostMapping("/role/addtouser")
-    public ResponseEntity<?> addRoleToUser(@RequestBody  RoleToUserForm form){
+    public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form){
         userService.addRoleToUser(form.getUsername(), form.getRolename());
         return ResponseEntity.ok().build();
     }
