@@ -29,10 +29,12 @@ public class RatingController {
         return ResponseEntity.ok().body(ratingService.getRatingById(ratingId));
     }
 
-    @PostMapping("/ratings")
-    public ResponseEntity<Rating> saveRating(@RequestBody Rating rating){
+    @PostMapping("/users/{userId}/ratings/{movieId}")
+    public ResponseEntity<Rating> createRating(@PathVariable(value = "userId")Long userId,
+                                               @PathVariable(value = "movieId")Long movieId,
+                                               @RequestBody Rating rating ){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/ratings").toUriString());
-        return ResponseEntity.created(uri).body(ratingService.saveRating(rating));
+        return ResponseEntity.created(uri).body(ratingService.saveRating(rating, movieId, userId));
     }
 
 }
