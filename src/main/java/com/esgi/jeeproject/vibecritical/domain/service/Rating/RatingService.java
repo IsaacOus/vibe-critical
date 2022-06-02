@@ -10,4 +10,5 @@ public interface RatingService {
     Rating getRatingById(Long ratingId);
 
     List<Rating> getRatings();
+
 }

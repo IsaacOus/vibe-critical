@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -23,5 +24,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie getMovie(String name) {
         return movieRepository.findByName(name);
+    }
+
+    @Override
+    public List<Movie> getAllMovies() {
+        return movieRepository.findAll();
     }
 }
