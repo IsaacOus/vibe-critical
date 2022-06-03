@@ -1,43 +1,36 @@
-package com.esgi.jeeproject.vibecritical.domain.entities.Rating;
+package com.esgi.jeeproject.vibecritical.domain.entities.User;
 
-import com.esgi.jeeproject.vibecritical.domain.entities.Movie.Movie;
-import com.esgi.jeeproject.vibecritical.domain.entities.User.User;
+import com.esgi.jeeproject.vibecritical.infrastructure.enums.WarningLevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
-
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "ratings")
-public class Rating  implements Serializable {
+@Table(name = "user_warning")
+public class UserWarning  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "movie_id", nullable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer"})
-    private Movie movie;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer"})
     private User user;
 
-    @Column(name = "ratings")
-    private float rating;
+    @Column(name = "warning")
+    private WarningLevel warning;
 
+    @Column(name = "description")
+    private String description;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")
     private Date createDate;
-
 
     public Long getId() {
         return id;
@@ -47,7 +40,6 @@ public class Rating  implements Serializable {
         this.id = id;
     }
 
-
     public User getUser() {
         return user;
     }
@@ -56,22 +48,28 @@ public class Rating  implements Serializable {
         this.user = user;
     }
 
-    public float getRating() {
-        return rating;
+    public WarningLevel getWarning() {
+        return warning;
     }
 
-    public void setRating(float rating) {
-        this.rating = rating;
+    public void setWarning(WarningLevel warning) {
+        this.warning = warning;
     }
 
-
-    public Movie getMovie() {
-        return movie;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 }

@@ -49,7 +49,7 @@ public class MovieController {
 
     @PostMapping()
     public ResponseEntity<Movie> saveRole(@RequestBody Movie movie){
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/movies").toUriString());
         return ResponseEntity.created(uri).body(movieService.saveMovie(movie));
     }
 }
