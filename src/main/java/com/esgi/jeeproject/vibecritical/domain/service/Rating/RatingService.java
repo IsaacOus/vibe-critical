@@ -21,11 +21,18 @@ public class RatingService {
     private final MovieRepository movieRepository;
 
     public Rating saveRating(Rating rating, Long movieId, Long userId) {
-       User user = userRepository.getById(userId);
-       rating.setUser(user);
-        Movie movie = movieRepository.getById(movieId);
-        rating.setMovie(movie);
-       return ratingRepository.save(rating);//TODO try catch with custom exception
+        Rating existRating = this.ratingRepository.findOneByUserIdAndMovieId(userId, movieId);
+        if (existRating != null) {
+            existRating.setRating(rating.getRating());
+            return ratingRepository.save(existRating);
+        } else {
+            User user = userRepository.getById(userId);
+            rating.setUser(user);
+            Movie movie = movieRepository.getById(movieId);
+            rating.setMovie(movie);
+            return ratingRepository.save(rating);
+            //TODO try catch with custom exception
+        }
     }
 
     public Rating getRatingById(Long ratingId) {
@@ -34,6 +41,19 @@ public class RatingService {
 
     public List<Rating> getRatings() {
         return ratingRepository.findAll();
+    }
+
+    public List<Rating> getAllRatingsByMovieName(String movieName) {
+        return ratingRepository.findByMovieName(movieName);
+    }
+
+    public float getGlobalRatingByMovieName(String movieName) {
+        List<Rating> ratings = this.getAllRatingsByMovieName(movieName);
+        float globalRating = 0;
+        for (Rating rating : ratings) {
+            globalRating += rating.getRating();
+        }
+        return globalRating / ratings.size();
     }
 
 }

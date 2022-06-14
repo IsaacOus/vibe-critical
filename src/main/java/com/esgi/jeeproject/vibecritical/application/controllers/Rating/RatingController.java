@@ -29,6 +29,16 @@ public class RatingController {
         return ResponseEntity.ok().body(ratingService.getRatingById(ratingId));
     }
 
+    @GetMapping("/ratings/movie/{movieName}")
+    public ResponseEntity<List<Rating>> getAllRatingsByMovieName(@PathVariable String movieName){
+        return ResponseEntity.ok().body(ratingService.getAllRatingsByMovieName(movieName));
+    }
+
+    @GetMapping("/ratings/globalRating/{movieName}")
+    public ResponseEntity<Float> getGlobalRatingByMovieName(@PathVariable String movieName){
+        return ResponseEntity.ok().body(ratingService.getGlobalRatingByMovieName(movieName));
+    }
+
     @PostMapping("/users/{userId}/ratings/{movieId}")
     public ResponseEntity<Rating> createRating(@PathVariable(value = "userId")Long userId,
                                                @PathVariable(value = "movieId")Long movieId,
@@ -36,5 +46,7 @@ public class RatingController {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/ratings").toUriString());
         return ResponseEntity.created(uri).body(ratingService.saveRating(rating, movieId, userId));
     }
+
+
 
 }
