@@ -1,13 +1,40 @@
 package com.esgi.jeeproject.vibecritical.domain.service.Comment;
 
 import com.esgi.jeeproject.vibecritical.domain.entities.Comment.Comment;
+import com.esgi.jeeproject.vibecritical.domain.entities.Movie.Movie;
+import com.esgi.jeeproject.vibecritical.domain.entities.User.User;
+import com.esgi.jeeproject.vibecritical.infrastructure.repositories.Comment.CommentRepository;
+import com.esgi.jeeproject.vibecritical.infrastructure.repositories.Movie.MovieRepository;
+import com.esgi.jeeproject.vibecritical.infrastructure.repositories.User.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
-public interface CommentService {
-    List<Comment> getCommentsByUserId(Long userId);
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class CommentService {
 
-    Comment addComment(Long userId,Long movieId,Comment comment);
+    private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
+    private final MovieRepository movieRepository;
 
-    List<Comment> getAll();
+    public List<Comment> getCommentsByUserId(Long userId) {
+        User user = userRepository.getById(userId);
+        return commentRepository.findByUser(user);
+    }
+
+    public Comment addComment(Long userId, Long movieId, Comment comment) {
+        User user = userRepository.getById(userId);
+        Movie movie = movieRepository.getById(movieId);
+        comment.setUser(user);
+        comment.setMovie(movie);
+        return commentRepository.save(comment);
+    }
+
+    public List<Comment> getAll() {
+        return commentRepository.findAll();
+    }
 }

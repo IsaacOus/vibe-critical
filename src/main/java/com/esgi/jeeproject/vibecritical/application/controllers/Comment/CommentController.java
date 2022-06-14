@@ -1,7 +1,6 @@
 package com.esgi.jeeproject.vibecritical.application.controllers.Comment;
 
 import com.esgi.jeeproject.vibecritical.domain.entities.Comment.Comment;
-import com.esgi.jeeproject.vibecritical.domain.entities.User.UserWarning;
 import com.esgi.jeeproject.vibecritical.domain.service.Comment.CommentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
