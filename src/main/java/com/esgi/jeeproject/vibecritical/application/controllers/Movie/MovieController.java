@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/movies")
@@ -35,11 +36,17 @@ public class MovieController {
     }
 
     @GetMapping(value = "/{movieName}")
-    private ResponseEntity<MovieDTO> getMovieInfo(@PathVariable("movieName") String movieName){
+    private ResponseEntity<Movie> getMovieInfo(@PathVariable("movieName") String movieName){
 
         var movieDTO = restTemplate.getForEntity("http://www.omdbapi.com/?t=" + movieName +  "&apikey="+ apiKey,MovieDTO.class);
+        Movie movie = Movie.fromMovieDTO(Objects.requireNonNull(movieDTO.getBody()));
 
-        return ResponseEntity.ok().body(movieDTO.getBody());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/movies").toUriString());
+        if(movieService.getMovie(movieName) != null){
+            return ResponseEntity.created(uri).body(movieService.getMovie(movieName));
+        }else{
+            return ResponseEntity.created(uri).body(movieService.saveMovie(movie));
+        }
     }
 
     @GetMapping()
@@ -50,6 +57,10 @@ public class MovieController {
     @PostMapping()
     public ResponseEntity<Movie> saveRole(@RequestBody Movie movie){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/movies").toUriString());
-        return ResponseEntity.created(uri).body(movieService.saveMovie(movie));
+        if(movieService.getMovie(movie.getName()) != null){
+            return ResponseEntity.created(uri).body(movieService.getMovie(movie.getName()));
+        }else{
+            return ResponseEntity.created(uri).body(movieService.saveMovie(movie));
+        }
     }
 }

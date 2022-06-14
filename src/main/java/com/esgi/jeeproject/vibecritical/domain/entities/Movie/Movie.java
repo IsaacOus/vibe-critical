@@ -1,5 +1,7 @@
 package com.esgi.jeeproject.vibecritical.domain.entities.Movie;
 
+import com.esgi.jeeproject.vibecritical.domain.DTOs.MovieDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -25,6 +27,16 @@ public class Movie implements Serializable {
 
     @Column(name = "movie_time")
     private String runtime;
+
+    public Movie(String name, String releaseDate, String genre, String director, String runtime) {
+        this.name = name;
+        this.releaseDate = releaseDate;
+        this.genre = genre;
+        this.director = director;
+        this.runtime = runtime;
+    }
+
+    public Movie() {}
 
     public Long getId() {
         return id;
@@ -73,6 +85,10 @@ public class Movie implements Serializable {
 
     public void setRuntime(String runtime) {
         this.runtime = runtime;
+    }
+
+    public static Movie fromMovieDTO(MovieDTO movieDTO){
+        return new Movie(movieDTO.getName(),movieDTO.getReleaseDate(),movieDTO.getGenre(),movieDTO.getDirector(),movieDTO.getRuntime());
     }
 
 }
