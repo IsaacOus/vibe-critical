@@ -20,6 +20,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final MovieRepository movieRepository;
+    private final CommentGuardService commentGuardService;
 
     public List<Comment> getCommentsByUserId(Long userId) {
         User user = userRepository.getById(userId);
@@ -31,7 +32,7 @@ public class CommentService {
         Movie movie = movieRepository.getById(movieId);
         comment.setUser(user);
         comment.setMovie(movie);
-        return commentRepository.save(comment);
+        return commentRepository.save(commentGuardService.analyseComment(comment,userId));
     }
 
     public List<Comment> getAll() {

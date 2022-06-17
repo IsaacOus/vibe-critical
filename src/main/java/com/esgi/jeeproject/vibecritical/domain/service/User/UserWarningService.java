@@ -28,4 +28,8 @@ public class UserWarningService {
         System.out.println(user);
         return userWarningRepository.save(userWarning);//TODO try catch with custom exception
     }
+
+    public List<UserWarning> findAll() {
+        return this.userWarningRepository.findAll();
+    }
 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     @Query("SELECT r FROM Rating r WHERE r.movie.name = :movieName")
-
     List<Rating> findByMovieName(String movieName);
 
     @Query("SELECT r FROM Rating r WHERE r.user.id = :userId AND r.movie.id = :movieName")

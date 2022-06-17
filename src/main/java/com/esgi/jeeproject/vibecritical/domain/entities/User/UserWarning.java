@@ -1,6 +1,5 @@
 package com.esgi.jeeproject.vibecritical.domain.entities.User;
 
-import com.esgi.jeeproject.vibecritical.infrastructure.enums.WarningLevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -22,7 +21,7 @@ public class UserWarning  implements Serializable {
     private User user;
 
     @Column(name = "warning")
-    private WarningLevel warning;
+    private int levelWarning;
 
     @Column(name = "description")
     private String description;
@@ -48,13 +47,6 @@ public class UserWarning  implements Serializable {
         this.user = user;
     }
 
-    public WarningLevel getWarning() {
-        return warning;
-    }
-
-    public void setWarning(WarningLevel warning) {
-        this.warning = warning;
-    }
 
     public Date getCreateDate() {
         return createDate;
@@ -72,4 +64,11 @@ public class UserWarning  implements Serializable {
         this.description = description;
     }
 
+    public int getLevelWarning() {
+        return levelWarning;
+    }
+
+    public void setLevelWarning(int levelWarning) {
+        this.levelWarning = levelWarning;
+    }
 }
