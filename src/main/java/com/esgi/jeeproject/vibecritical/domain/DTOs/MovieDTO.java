@@ -24,4 +24,7 @@ public class MovieDTO {
     @JsonProperty("Plot")
     private String plot;
 
+    @JsonProperty("Poster")
+    private String poster;
+
 }
