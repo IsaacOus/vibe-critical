@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "comment")
@@ -73,6 +74,25 @@ public class Comment  implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public Comment(Movie movie, User user, String text) {
+        this.movie = movie;
+        this.user = user;
+        this.text = text;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment = (Comment) o;
+        return Objects.equals(id, comment.id) && Objects.equals(movie, comment.movie) && Objects.equals(user, comment.user) && Objects.equals(text, comment.text) && Objects.equals(createDate, comment.createDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, movie, user, text, createDate);
     }
 
 }

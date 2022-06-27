@@ -28,7 +28,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("Test findAll")
-    void testFindAllUser(){
+    void test_find_all_users(){
         User user1 = new User(1L,"Bob","bob","1234",null);
         User user2 = new User(2L,"Smith","smith","1234",null);
         doReturn(Arrays.asList(user1,user2)).when(repository).findAll();
@@ -43,7 +43,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("Test findByUserName Success")
-    void testFindByUserName(){
+    void test_find_user_by_username(){
         User user = new User(1L,"Bob","bob","1234",null);
         doReturn(user).when(repository).findByUsername("bob");
 
@@ -58,7 +58,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("Test save User")
-    void testSaveUser(){
+    void test_save_user(){
         User user = new User(1L,"Bob","bob","1234",null);
         doReturn(user).when(repository).save(user);
 

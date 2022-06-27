@@ -55,7 +55,7 @@ public class MovieController {
     }
 
     @PostMapping()
-    public ResponseEntity<Movie> saveRole(@RequestBody Movie movie){
+    public ResponseEntity<Movie> saveMovie(@RequestBody Movie movie){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/movies").toUriString());
         if(movieService.getMovie(movie.getName()) != null){
             return ResponseEntity.created(uri).body(movieService.getMovie(movie.getName()));
