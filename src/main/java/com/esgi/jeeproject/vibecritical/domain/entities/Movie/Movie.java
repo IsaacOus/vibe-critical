@@ -35,6 +35,10 @@ public class Movie implements Serializable {
     @Column(name = "poster")
     private String poster;
 
+    @Column(name = "imdbRating")
+    private String imdbRating;
+
+
     public Movie(Long id, String name, String releaseDate, String genre, String director, String runtime) {
         this.id = id;
         this.name = name;
@@ -44,7 +48,7 @@ public class Movie implements Serializable {
         this.runtime = runtime;
     }
 
-    public Movie(String name, String releaseDate, String genre, String director, String runtime, String plot ,String poster) {
+    public Movie(String name, String releaseDate, String genre, String director, String runtime, String plot ,String poster, String imdbRating) {
         this.name = name;
         this.releaseDate = releaseDate;
         this.genre = genre;
@@ -52,6 +56,7 @@ public class Movie implements Serializable {
         this.runtime = runtime;
         this.poster = poster;
         this.plot = plot;
+        this.imdbRating = imdbRating;
     }
 
     public Movie() {}
@@ -122,8 +127,16 @@ public class Movie implements Serializable {
         this.plot = plot;
     }
 
+    public String getImdbRating() {
+        return imdbRating;
+    }
+
+    public void setImdbRating(String imdbRating) {
+        this.imdbRating = imdbRating;
+    }
+
     public static Movie fromMovieDTO(MovieDTO movieDTO){
-        return new Movie(movieDTO.getName(),movieDTO.getReleaseDate(),movieDTO.getGenre(),movieDTO.getDirector(),movieDTO.getRuntime(),movieDTO.getPlot(),movieDTO.getPoster());
+        return new Movie(movieDTO.getName(),movieDTO.getReleaseDate(),movieDTO.getGenre(),movieDTO.getDirector(),movieDTO.getRuntime(),movieDTO.getPlot(),movieDTO.getPoster(),movieDTO.getImdbRating());
     }
 
 }

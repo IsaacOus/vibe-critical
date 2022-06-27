@@ -27,4 +27,7 @@ public class MovieDTO {
     @JsonProperty("Poster")
     private String poster;
 
+    @JsonProperty("imdbRating")
+    private String imdbRating;
+
 }
