@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/movies")
@@ -35,7 +36,7 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @GetMapping(value = "/{movieName}")
+    @GetMapping(value = "/name/{movieName}")
     private ResponseEntity<Movie> getMovieInfo(@PathVariable("movieName") String movieName){
 
         var movieDTO = restTemplate.getForEntity("http://www.omdbapi.com/?t=" + movieName +  "&apikey="+ apiKey,MovieDTO.class);
@@ -52,6 +53,11 @@ public class MovieController {
     @GetMapping()
     private ResponseEntity<List<Movie>> getAllMovies(){
         return ResponseEntity.ok().body(movieService.getAllMovies());
+    }
+
+    @GetMapping("/{movieId}")
+    private ResponseEntity<Optional<Movie>> getById(@PathVariable("movieId") Long movieId){
+        return ResponseEntity.ok().body(movieService.getById(movieId));
     }
 
     @PostMapping()
