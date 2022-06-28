@@ -26,12 +26,12 @@ public class CommentController {
     }
 
     @GetMapping("/user/{userId}/comments")
-    public ResponseEntity<List<Comment>> getUserWarningsById(@PathVariable(value = "userId")Long userId){
+    public ResponseEntity<List<Comment>> getCommentsByUserId(@PathVariable(value = "userId")Long userId){
         return ResponseEntity.ok().body(commentService.getCommentsByUserId(userId));
     }
 
     @PostMapping("/user/{userId}/{movieId}/comments")
-    public ResponseEntity<Comment> createRating(@PathVariable(value = "userId")Long userId,
+    public ResponseEntity<Comment> createComment(@PathVariable(value = "userId")Long userId,
                                                     @PathVariable(value = "movieId")Long movieId,
                                                     @RequestBody Comment comment ){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/comments").toUriString());
