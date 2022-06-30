@@ -38,4 +38,9 @@ public class CommentService {
     public List<Comment> getAll() {
         return commentRepository.findAll();
     }
+
+    public List<Comment> getAllByMovieId(Long movieId) {
+        return commentRepository.findAllByMovieId(movieId);
+    }
+
 }
