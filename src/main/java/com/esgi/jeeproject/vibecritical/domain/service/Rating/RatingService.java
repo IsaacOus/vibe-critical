@@ -3,6 +3,7 @@ package com.esgi.jeeproject.vibecritical.domain.service.Rating;
 import com.esgi.jeeproject.vibecritical.domain.entities.Movie.Movie;
 import com.esgi.jeeproject.vibecritical.domain.entities.Rating.Rating;
 import com.esgi.jeeproject.vibecritical.domain.entities.User.User;
+import com.esgi.jeeproject.vibecritical.domain.service.Ban.BanService;
 import com.esgi.jeeproject.vibecritical.infrastructure.repositories.Movie.MovieRepository;
 import com.esgi.jeeproject.vibecritical.infrastructure.repositories.Rating.RatingRepository;
 import com.esgi.jeeproject.vibecritical.infrastructure.repositories.User.UserRepository;
@@ -19,19 +20,24 @@ public class RatingService {
     private final RatingRepository ratingRepository;
     private final UserRepository userRepository;
     private final MovieRepository movieRepository;
+    private final BanService banService;
 
-    public Rating saveRating(Rating rating, Long movieId, Long userId) {
-        Rating existRating = this.ratingRepository.findOneByUserIdAndMovieId(userId, movieId);
-        if (existRating != null) {
-            existRating.setRating(rating.getRating());
-            return ratingRepository.save(existRating);
-        } else {
-            User user = userRepository.getById(userId);
-            rating.setUser(user);
-            Movie movie = movieRepository.getById(movieId);
-            rating.setMovie(movie);
-            return ratingRepository.save(rating);
-            //TODO try catch with custom exception
+
+    public Rating saveRating(Rating rating, Long movieId, Long userId) throws Exception {
+        if(!banService.getUserIsBan(userId)){
+            Rating existRating = this.ratingRepository.findOneByUserIdAndMovieId(userId, movieId);
+            if (existRating != null) {
+                existRating.setRating(rating.getRating());
+                return ratingRepository.save(existRating);
+            } else {
+                User user = userRepository.getById(userId);
+                rating.setUser(user);
+                Movie movie = movieRepository.getById(movieId);
+                rating.setMovie(movie);
+                return ratingRepository.save(rating);
+            }
+        }else{
+            throw new Exception("User is ban, the rating is not save!");
         }
     }
 

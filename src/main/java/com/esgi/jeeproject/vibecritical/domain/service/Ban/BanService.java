@@ -32,4 +32,9 @@ public class BanService {
         User user = userRepository.getById(userId);
         return banRepository.findByUser(user);
     }
+
+    public boolean getUserIsBan(Long userId) {
+        User user = userRepository.getById(userId);
+        return banRepository.findByUser(user) != null;
+    }
 }

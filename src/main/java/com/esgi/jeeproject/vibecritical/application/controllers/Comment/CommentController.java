@@ -39,7 +39,7 @@ public class CommentController {
     @PostMapping("/user/{userId}/{movieId}/comments")
     public ResponseEntity<Comment> createComment(@PathVariable(value = "userId")Long userId,
                                                     @PathVariable(value = "movieId")Long movieId,
-                                                    @RequestBody Comment comment ){
+                                                    @RequestBody Comment comment ) throws Exception {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/comments").toUriString());
         return ResponseEntity.created(uri).body(commentService.addComment(userId,movieId, comment));
     }

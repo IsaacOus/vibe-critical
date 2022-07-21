@@ -42,7 +42,7 @@ public class RatingController {
     @PostMapping("/users/{userId}/ratings/{movieId}")
     public ResponseEntity<Rating> createRating(@PathVariable(value = "userId")Long userId,
                                                @PathVariable(value = "movieId")Long movieId,
-                                               @RequestBody Rating rating ){
+                                               @RequestBody Rating rating ) throws Exception {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/ratings").toUriString());
         return ResponseEntity.created(uri).body(ratingService.saveRating(rating, movieId, userId));
     }

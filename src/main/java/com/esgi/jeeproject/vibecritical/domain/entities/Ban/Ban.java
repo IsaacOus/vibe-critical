@@ -11,6 +11,7 @@ import java.util.Date;
 @Table(name = "ban")
 public class Ban {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -20,6 +21,20 @@ public class Ban {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date bannedDate;
+
+    public Ban(User user, Date bannedDate) {
+        this.user = user;
+        this.bannedDate = bannedDate;
+    }
+
+    public Ban(Long id, User user, Date bannedDate) {
+        this.id = id;
+        this.user = user;
+        this.bannedDate = bannedDate;
+    }
+
+    public Ban() {
+    }
 
     public Long getId() {
         return id;
