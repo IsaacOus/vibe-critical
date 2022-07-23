@@ -5,8 +5,6 @@ import com.esgi.jeeproject.vibecritical.domain.entities.User.RoleToUserForm;
 import com.esgi.jeeproject.vibecritical.domain.entities.User.User;
 import com.esgi.jeeproject.vibecritical.domain.service.User.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,10 +21,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/context")
-    public Object getCurrentUserContext() {
-        SecurityContext context = SecurityContextHolder.getContext();
-        return context.getAuthentication();
+    @GetMapping("/currentId")
+    public Long getCurrentUserId() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userService.getUser(username).getId();
     }
 
     @GetMapping("/")
@@ -40,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<User> saveUser(@RequestBody User user){
+    public ResponseEntity<User> saveUser(@RequestBody User user) throws Exception {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }

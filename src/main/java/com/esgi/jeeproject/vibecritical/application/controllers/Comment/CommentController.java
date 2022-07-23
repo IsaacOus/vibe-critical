@@ -1,8 +1,11 @@
 package com.esgi.jeeproject.vibecritical.application.controllers.Comment;
 
 import com.esgi.jeeproject.vibecritical.domain.entities.Comment.Comment;
+import com.esgi.jeeproject.vibecritical.domain.entities.User.User;
 import com.esgi.jeeproject.vibecritical.domain.service.Comment.CommentService;
+import com.esgi.jeeproject.vibecritical.domain.service.User.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,9 +17,11 @@ import java.util.List;
 public class CommentController {
 
     private final CommentService commentService;
+    private final UserService userService;
 
-    public CommentController(CommentService commentService) {
+    public CommentController(CommentService commentService, UserService userService) {
         this.commentService = commentService;
+        this.userService = userService;
     }
 
 
@@ -36,12 +41,12 @@ public class CommentController {
         return ResponseEntity.ok().body(commentService.getCommentsByUserId(userId));
     }
 
-    @PostMapping("/user/{userId}/{movieId}/comments")
-    public ResponseEntity<Comment> createComment(@PathVariable(value = "userId")Long userId,
-                                                    @PathVariable(value = "movieId")Long movieId,
+    @PostMapping("/user/{movieId}/comments")
+    public ResponseEntity<Comment> createComment(@PathVariable(value = "movieId")Long movieId,
                                                     @RequestBody Comment comment ) throws Exception {
+        User currentUser = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/comments").toUriString());
-        return ResponseEntity.created(uri).body(commentService.addComment(userId,movieId, comment));
+        return ResponseEntity.created(uri).body(commentService.addComment(currentUser.getId(),movieId, comment));
     }
 
 }
