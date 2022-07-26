@@ -50,9 +50,13 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public User saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public User saveUser(User user) throws Exception {
+        if(userRepository.findByUsername(user.getName()) == null){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return userRepository.save(user);
+        }else {
+            throw new Exception("User with this name already exist!");
+        }
     }
 
     public Role saveRole(Role role) {

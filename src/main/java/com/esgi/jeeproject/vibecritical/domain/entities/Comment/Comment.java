@@ -3,6 +3,8 @@ package com.esgi.jeeproject.vibecritical.domain.entities.Comment;
 import com.esgi.jeeproject.vibecritical.domain.entities.Movie.Movie;
 import com.esgi.jeeproject.vibecritical.domain.entities.User.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "comment")
+@NoArgsConstructor
 public class Comment  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
