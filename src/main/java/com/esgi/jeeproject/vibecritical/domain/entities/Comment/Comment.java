@@ -36,6 +36,9 @@ public class Comment  implements Serializable {
     @Column(name = "create_date")
     private Date createDate;
 
+    public Comment() {
+    }
+
     public Long getId() {
         return id;
     }

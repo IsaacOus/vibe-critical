@@ -4,6 +4,7 @@ import com.esgi.jeeproject.vibecritical.domain.entities.User.Role;
 import com.esgi.jeeproject.vibecritical.domain.entities.User.User;
 import com.esgi.jeeproject.vibecritical.infrastructure.repositories.User.RoleRepository;
 import com.esgi.jeeproject.vibecritical.infrastructure.repositories.User.UserRepository;
+import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,13 +22,20 @@ import java.util.Optional;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    @Autowired
     private final PasswordEncoder passwordEncoder;
+
+
+    @Autowired
+    public UserService(@NotNull UserRepository userRepository, @NotNull RoleRepository roleRepository, @NotNull PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
 
 
     @Override

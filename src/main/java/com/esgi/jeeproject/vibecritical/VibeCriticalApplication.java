@@ -16,11 +16,11 @@ public class VibeCriticalApplication {
         SpringApplication.run(VibeCriticalApplication.class, args);
     }
 
-    @Bean
+   /* @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
+*/
     @Bean
     RestTemplate restTemplate(){
         return new RestTemplate();

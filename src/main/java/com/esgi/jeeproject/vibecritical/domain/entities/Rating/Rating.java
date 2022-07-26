@@ -38,6 +38,13 @@ public class Rating  implements Serializable {
     @Column(name = "create_date")
     private Date createDate;
 
+    public Rating(Long id, Movie movie, User user, float rating, Date createDate) {
+        this.id = id;
+        this.movie = movie;
+        this.user = user;
+        this.rating = rating;
+        this.createDate = createDate;
+    }
 
     public Long getId() {
         return id;
