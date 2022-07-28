@@ -1,5 +1,6 @@
 package com.esgi.jeeproject.vibecritical.domain.service.rating;
 
+import com.esgi.jeeproject.vibecritical.application.controllers.User.UserController;
 import com.esgi.jeeproject.vibecritical.domain.entities.Comment.Comment;
 import com.esgi.jeeproject.vibecritical.domain.entities.Movie.Movie;
 import com.esgi.jeeproject.vibecritical.domain.entities.Rating.Rating;
@@ -15,6 +16,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -24,7 +27,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
-
 @ExtendWith(MockitoExtension.class)
 public class RatingServiceTest {
     @InjectMocks

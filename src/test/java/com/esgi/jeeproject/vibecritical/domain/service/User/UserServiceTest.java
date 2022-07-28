@@ -1,5 +1,6 @@
 package com.esgi.jeeproject.vibecritical.domain.service.User;
 
+import com.esgi.jeeproject.vibecritical.application.controllers.User.UserController;
 import com.esgi.jeeproject.vibecritical.domain.entities.User.User;
 import com.esgi.jeeproject.vibecritical.infrastructure.repositories.User.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +19,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
-
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
