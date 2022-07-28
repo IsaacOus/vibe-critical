@@ -16,9 +16,6 @@ public class VibeCriticalApplication {
         SpringApplication.run(VibeCriticalApplication.class, args);
         System.out.println("it work");
     }
-<<<<<<< HEAD
-=======
-
    /* @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -33,6 +30,4 @@ public class VibeCriticalApplication {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
-
->>>>>>> dev
 }

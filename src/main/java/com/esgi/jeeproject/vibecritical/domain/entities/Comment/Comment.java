@@ -14,7 +14,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "comment")
-@NoArgsConstructor
 public class Comment  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
